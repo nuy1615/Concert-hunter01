@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ล่าแต้มคอนฯ | Concert Point Hunter</title>
+<style>
+:root{--y:#ffd21a;--ink:#111;--bg:#f7f7f4;--muted:#666}
+*{box-sizing:border-box}body{margin:0;background:#171717;font-family:Arial,"Noto Sans Thai",sans-serif;color:var(--ink)}
+button,input,select,textarea{font:inherit}.app{width:min(100%,430px);min-height:100vh;margin:auto;background:var(--bg);padding-bottom:82px;overflow:hidden}
+header{height:66px;background:var(--y);border-bottom:3px solid var(--ink);display:flex;align-items:center;justify-content:space-between;padding:8px 14px;position:sticky;top:0;z-index:10}
+.logo{font-weight:1000;font-size:23px;line-height:.9}.logo small{font-size:8px;letter-spacing:1px}.headbtn{border:2px solid #111;background:#fff;border-radius:12px;width:42px;height:42px}
+.page{display:none}.page.on{display:block}.pad{padding:14px}.back{border:0;background:none;font-size:25px;font-weight:900;cursor:pointer}.title{font-size:22px;font-weight:1000}
+.hero{margin:14px;padding:18px;border:3px solid #111;border-radius:24px;background:var(--y);position:relative;overflow:hidden;box-shadow:0 4px 0 #111}
+.hero:after{content:"♪  ♫  ★  ⚡";position:absolute;right:-4px;top:7px;font-size:32px;transform:rotate(8deg)}
+.hero h1{font-size:30px;line-height:1;margin:0 0 9px;max-width:260px}.hero p{font-weight:800;max-width:280px}.mascot{font-size:67px;text-align:right;line-height:1;filter:drop-shadow(3px 3px 0 #111)}
+.points{margin:14px;padding:17px;background:#111;color:#fff;border-radius:20px}.points b{font-size:38px;color:var(--y)}.bar{height:10px;background:#555;border-radius:20px;overflow:hidden}.bar i{display:block;width:62%;height:100%;background:var(--y)}
+h2{font-size:20px;margin:20px 0 10px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.stat{background:white;border:2px solid #111;border-radius:14px;text-align:center;padding:9px 3px}.stat b{font-size:20px;display:block}.stat span{font-size:9px;font-weight:800}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:#fff;border:2px solid #111;border-radius:17px;padding:9px;cursor:pointer}.card:active,.char:active{transform:scale(.98)}.pic{height:88px;border-radius:12px;display:grid;place-items:center;font-size:55px;background:#ffdff0}.card:nth-child(2) .pic{background:#ddd9ff}.card b{font-size:13px}.card small{color:#666}
+.activity,.notice{background:#fff;border:2px solid #111;border-radius:14px;padding:11px;margin:9px 0;display:flex;gap:10px;align-items:center}.badge{width:40px;height:40px;border-radius:12px;background:var(--y);border:2px solid #111;display:grid;place-items:center;flex:none}
+.btn{border:3px solid #111;border-radius:14px;background:var(--y);padding:13px;width:100%;font-weight:1000;cursor:pointer;box-shadow:0 3px 0 #111}.btn:active{transform:translateY(2px);box-shadow:0 1px 0 #111}
+.chargrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.char{background:white;border:2px solid #111;border-radius:18px;padding:10px;text-align:center;cursor:pointer}.char.sel{background:var(--y);box-shadow:0 3px 0 #111}.avatar{font-size:60px;line-height:1}.char b{display:block;margin-top:5px}.char small{color:#666}
+.preview{display:flex;align-items:center;gap:14px;background:#111;color:white;border-radius:20px;padding:13px;margin:10px 0}.preview .avatar{font-size:62px}.preview b{font-size:20px;color:var(--y)}
+.field{margin:12px 0}.field label{display:block;font-weight:900;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:12px;border:2px solid #111;border-radius:12px;background:white}.field textarea{min-height:100px}
+.map{height:430px;margin:14px;border:3px solid #111;border-radius:22px;background:#dff1bd;position:relative;overflow:hidden}.road{position:absolute;background:white;border:2px solid #bbb;width:600px;height:60px;left:-90px;top:170px;transform:rotate(28deg)}.road.r2{top:300px;transform:rotate(-32deg)}.pin{position:absolute;width:54px;height:54px;border:2px solid #111;border-radius:50%;background:var(--y);font-size:24px;cursor:pointer}.a{left:170px;top:60px}.b{right:30px;top:145px}.c{left:35px;bottom:95px}.d{right:75px;bottom:42px}.e{left:180px;top:255px}
+.rankrow{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid #111;border-radius:14px;padding:12px;margin:9px 0}.ranknum{font-size:24px;width:34px;text-align:center}.me{background:var(--y)}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,430px);height:76px;background:white;border-top:3px solid #111;display:grid;grid-template-columns:repeat(5,1fr);z-index:20}.nav{border:0;background:white;font-size:10px;font-weight:900}.nav.on{background:var(--y)}.nav span{display:block;font-size:23px}
+.toast{position:fixed;z-index:30;bottom:91px;left:50%;transform:translate(-50%,20px);background:#111;color:#fff;border-radius:14px;padding:12px 17px;font-weight:900;opacity:0;transition:.2s;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="logo">ล่าแต้มคอนฯ<small>CONCERT POINT HUNTER</small></div><button class="headbtn" onclick="go('notify')">🔔</button></header>
+
+<section id="home" class="page on">
+<div class="hero"><h1>Concert Point Hub</h1><p>เก็บแต้มให้ครบทุกโซน แล้วไปล่าคอนฯ กัน!</p><div class="mascot" id="homeChar">🧑🏻‍🎤👩🏻‍🎤</div></div>
+<div class="points">⭐ แต้มบุญสะสม<br><b id="points">1,250</b> POINT<div class="bar"><i id="progress"></i></div></div>
+<div class="pad"><h2>สถิติการพิชิตคอนฯ ของฉัน</h2><div class="stats"><div class="stat"><b>12</b><span>ลงทะเบียน</span></div><div class="stat"><b>8</b><span>เช็คอิน</span></div><div class="stat"><b>3</b><span>รอยืนยัน</span></div><div class="stat"><b>2</b><span>บัตรกำลังมา</span></div></div>
+<h2>กลุ่มภารกิจคอนเสิร์ต</h2><div class="grid"><div class="card" onclick="go('task')"><div class="pic">🦄</div><b>The Pastel World Tour</b><small>+100 POINT</small></div><div class="card" onclick="go('task')"><div class="pic">🎸</div><b>The Electric Night</b><small>+150 POINT</small></div></div>
+<h2>ความเคลื่อนไหวในวงการ</h2><div class="activity"><div class="badge">🎫</div><div><b>บัตร The Electric Night</b><br><small>เปิดจำหน่ายเร็ว ๆ นี้</small></div></div><div class="activity"><div class="badge">⭐</div><div><b>ภารกิจใหม่มาแล้ว</b><br><small>เช็คอินรับ +100 แต้ม</small></div></div></div>
+</section>
+
+<section id="char" class="page"><div class="pad"><button class="back" onclick="go('profile')">←</button><span class="title"> เลือกคาแรคเตอร์</span>
+<div class="hero"><h1>เป็นตัวคุณในโลกคอนเสิร์ต!</h1><p>เลือกสไตล์ แล้วไปล่าแต้มกันเลย 🎤</p><div class="mascot">🧑🏻‍🎤👩🏻‍🎤</div></div>
+<div class="preview"><div class="avatar" id="chosenAvatar">🧑🏻‍🎤</div><div><b id="chosenName">Concert Boy</b><br><small>ตัวที่เลือกอยู่ตอนนี้</small></div></div>
+<div class="chargrid" id="chars">
+<div class="char sel" data-a="🧑🏻‍🎤" data-n="Concert Boy"><div class="avatar">🧑🏻‍🎤</div><b>Concert Boy</b><small>สายลุย</small></div>
+<div class="char" data-a="👩🏻‍🎤" data-n="Concert Girl"><div class="avatar">👩🏻‍🎤</div><b>Concert Girl</b><small>ตัวแม่</small></div>
+<div class="char" data-a="🧑🏽‍🎸" data-n="Rock Hunter"><div class="avatar">🧑🏽‍🎸</div><b>Rock Hunter</b><small>สายร็อก</small></div>
+<div class="char" data-a="👩🏻‍🎸" data-n="Rock Queen"><div class="avatar">👩🏻‍🎸</div><b>Rock Queen</b><small>สายเดือด</small></div>
+<div class="char" data-a="🧑🏻‍🎧" data-n="Music Lover"><div class="avatar">🧑🏻‍🎧</div><b>Music Lover</b><small>สายชิล</small></div>
+<div class="char" data-a="👩🏻‍🎧" data-n="Festival Girl"><div class="avatar">👩🏻‍🎧</div><b>Festival Girl</b><small>สายเฟส</small></div>
+<div class="char" data-a="🧑🏻‍🎤" data-n="Indie Boy"><div class="avatar">🧑🏻‍🎤</div><b>Indie Boy</b><small>สายอินดี้</small></div>
+<div class="char" data-a="👩🏻‍🎤" data-n="K-POP Girl"><div class="avatar">👩🏻‍🎤</div><b>K-POP Girl</b><small>สายเกาหลี</small></div>
+</div><br><button class="btn" onclick="saveChar()">✨ ใช้คาแรคเตอร์นี้</button></div></section>
+
+<section id="task" class="page"><div class="pad"><button class="back" onclick="go('home')">←</button><span class="title"> ภารกิจใหม่</span><div class="hero"><h1>สร้างภารกิจล่าแต้ม!</h1><p>ทำภารกิจ เก็บแต้ม ปลดล็อกสิทธิ์</p><div class="mascot">🎤🧑🏻‍🎤</div></div>
+<div class="field"><label>ประเภทกิจกรรม</label><select><option>🎫 กดบัตร</option><option>📸 ถ่ายรูปหน้างาน</option><option>🛍️ ซื้อของที่ระลึก</option><option>💖 แฟนโปรเจกต์</option></select></div>
+<div class="field"><label>คอนเสิร์ต</label><select><option>The Pastel World Tour</option><option>The Electric Night</option></select></div>
+<div class="field"><label>รายละเอียด</label><textarea placeholder="ขั้นตอนภารกิจ..."></textarea></div>
+<button class="btn" onclick="addPoints()">✨ ยืนยันสร้างภารกิจ +100 แต้ม</button></div></section>
+
+<section id="notify" class="page"><div class="pad"><h2>🔔 การแจ้งเตือนความฟิน</h2><div class="notice"><div class="badge">⭐</div><div><b>คุณได้รับ +100 แต้ม!</b><br><small>จากการเช็คอินคอนเสิร์ต</small></div></div><div class="notice"><div class="badge">🎫</div><div><b>บัตร The Electric Night</b><br><small>เปิดจำหน่ายในอีก 3 วัน</small></div></div><div class="notice"><div class="badge">✅</div><div><b>ภารกิจได้รับการอนุมัติ</b><br><small>แต้มเข้าบัญชีเรียบร้อย</small></div></div></div></section>
+
+<section id="map" class="page"><div class="pad"><h2>🗺️ Map of Joy</h2><b>แผนที่โซนความฟินหน้างาน</b></div><div class="map"><div class="road"></div><div class="road r2"></div><button class="pin a" onclick="toast('🎤 Main Stage')">🎤</button><button class="pin b" onclick="toast('🛍️ Merch Booth')">🛍️</button><button class="pin c" onclick="toast('📸 Photo Zone +50')">📸</button><button class="pin d" onclick="toast('⚠️ จุดรวมพล')">⚠️</button><button class="pin e" onclick="toast('🎫 จุดรับบัตร')">🎫</button></div><div class="pad"><button class="btn" onclick="toast('📍 กำลังเปิดเส้นทาง')">📍 ดูเส้นทาง</button></div></section>
+
+<section id="rank" class="page"><div class="pad"><h2>🏆 อันดับนักล่าแต้ม</h2><div class="rankrow"><div class="ranknum">🥇</div><div><b>ConcertQueen</b><br><small>3,850 POINT</small></div></div><div class="rankrow"><div class="ranknum">🥈</div><div><b>MusicHunter</b><br><small>3,420 POINT</small></div></div><div class="rankrow"><div class="ranknum">🥉</div><div><b>RockStar</b><br><small>2,980 POINT</small></div></div><div class="rankrow me"><div class="ranknum">⭐</div><div><b>12. คุณ</b><br><small id="rankPts">1,250 POINT</small></div></div></div></section>
+
+<section id="profile" class="page"><div class="pad"><h2>👤 โปรไฟล์แฟนคลับ</h2><div class="preview"><div class="avatar" id="profileAvatar">🧑🏻‍🎤</div><div><b id="profileName">Concert Boy</b><br><small>LV.5 · <span id="profilePts">1,250</span> POINT</small></div></div><button class="btn" onclick="go('char')">🎨 เปลี่ยนคาแรคเตอร์</button><div class="notice">👤 ข้อมูลส่วนตัว <span style="margin-left:auto">›</span></div><div class="notice">🔔 การแจ้งเตือน <span style="margin-left:auto">›</span></div><div class="notice">🔒 ความเป็นส่วนตัว <span style="margin-left:auto">›</span></div></div></section>
+
+<nav><button class="nav on" data-p="home" onclick="go('home')"><span>⌂</span>หน้าแรก</button><button class="nav" data-p="task" onclick="go('task')"><span>☑</span>ภารกิจ</button><button class="nav" data-p="map" onclick="go('map')"><span>🎵</span>คอนเสิร์ต</button><button class="nav" data-p="rank" onclick="go('rank')"><span>🏆</span>อันดับ</button><button class="nav" data-p="profile" onclick="go('profile')"><span>♙</span>โปรไฟล์</button></nav>
+<div class="toast" id="toast"></div>
+</div>
+<script>
+let pts=+(localStorage.cp_pts||1250), avatar=localStorage.cp_avatar||'🧑🏻‍🎤', name=localStorage.cp_name||'Concert Boy';
+function $(x){return document.getElementById(x)}
+function render(){ $('points').textContent=pts.toLocaleString();$('rankPts').textContent=pts.toLocaleString()+' POINT';$('profilePts').textContent=pts.toLocaleString();$('progress').style.width=Math.min(100,pts/20)+'%';$('profileAvatar').textContent=avatar;$('profileName').textContent=name;$('homeChar').textContent=avatar}
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));$(id).classList.add('on');document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('on',n.dataset.p===id));scrollTo(0,0)}
+document.querySelectorAll('.char').forEach(c=>c.onclick=()=>{document.querySelectorAll('.char').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');avatar=c.dataset.a;name=c.dataset.n;$('chosenAvatar').textContent=avatar;$('chosenName').textContent=name});
+function saveChar(){localStorage.cp_avatar=avatar;localStorage.cp_name=name;render();toast('เปลี่ยนคาแรคเตอร์แล้ว 🎉');go('home')}
+function addPoints(){pts+=100;localStorage.cp_pts=pts;render();toast('ภารกิจสำเร็จ! +100 POINT ⭐');go('home')}
+function toast(s){let t=$('toast');t.textContent=s;t.classList.add('show');clearTimeout(window.t);window.t=setTimeout(()=>t.classList.remove('show'),2200)}
+render();
+document.querySelectorAll('.char').forEach(c=>{if(c.dataset.a===avatar&&c.dataset.n===name){document.querySelectorAll('.char').forEach(x=>x.classList.remove('sel'));c.classList.add('sel')}})
+</script>
+</body></html>
